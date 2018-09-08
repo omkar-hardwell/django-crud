@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crudwebapp.apps.CrudwebappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,10 +74,25 @@ WSGI_APPLICATION = 'mywebapps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'database',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+            'init_command': 'SET default_storage_engine=INNODB'
+        },
+        'HOST': 'host',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'PORT': 3306,
     }
 }
 

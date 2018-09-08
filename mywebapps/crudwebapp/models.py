@@ -16,8 +16,8 @@ class Department(models.Model):
 
 class GenderChoice(ChoiceEnum):
     """Enumeration for gender choice for employee model."""
-    MALE = 'Male'
-    FEMALE = 'Female'
+    male = 'Male'
+    female = 'Female'
 
 
 class Employee(models.Model):
@@ -33,7 +33,7 @@ class Employee(models.Model):
     gender = models.CharField(
         max_length=6,
         choices=GenderChoice.choices(),
-        default=GenderChoice.MALE,
+        default=GenderChoice.male,
         null=False
     )
     address = models.CharField(max_length=1000, null=True)

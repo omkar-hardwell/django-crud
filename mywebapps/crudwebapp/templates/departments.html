@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Department ID</th>
+        <th>Department Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for department in departments %}
+        <tr>
+            <td>{{ department.department_id }}</td>
+            <td>{{ department.name }}</td>
+            <td>
+                <a href="/edit_department/{{ department.department_id }}"><span>Edit</span></a>
+                <a href="/delete_department/{{ department.department_id }}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<center><a href="/add_department">Add New Record</a></center>
+</body>
+</html>

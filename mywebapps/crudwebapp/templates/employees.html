@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Department</th>
+        <th>Date of Join</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Salary</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in employees %}
+        <tr>
+            <td>{{ employee.employee_id }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department.name }}</td>
+            <td>{{ employee.date_of_join }}</td>
+            <td>{{ employee.gender }}</td>
+            <td>{{ employee.address }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>
+                <a href="/edit_employee/{{ employee.employee_id }}"><span>Edit</span></a>
+                <a href="/delete_employee/{{ employee.nmae }}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<center><a href="/add_employee">Add New Record</a></center>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Department Add</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+    <center><h1>Departments</h1></center>
+    <hr />
+    <div align="center">
+        <form method="POST" name ="add_form" action="/add_department/" class="form-align">
+            {% csrf_token %}
+            <label>Department Name:</label>
+            {{ form.name }}
+            <br /><br />
+            <center><button type="submit" class="link_button form-button">Submit</button></center>
+        </form>
+    </div>
+</body>
+</html>

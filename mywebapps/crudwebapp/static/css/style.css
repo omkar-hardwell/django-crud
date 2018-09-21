@@ -35,3 +35,23 @@ tr:nth-child(odd) {background: #FFF}
     padding: 0px 12px;
     text-decoration: none;
 }
+
+.form-align {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.form-button {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input[type=text] {
+    padding: 10px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}

@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Department
-from .models import Employee
-from .forms import DepartmentForm
+from .models import Department, Employee, GenderChoice
+from .forms import DepartmentForm, EmployeeForm
 
 
 # Create your views here.
@@ -88,3 +87,72 @@ def employees(request):
     employee_list = Employee.objects.all()
     return render(
         request, 'employees.html', {'employees': employee_list})
+
+
+def add_employee(request):
+    """Add employee.
+    :param request: Obj - Request.
+    :return: Renders to employees view on saved or add employee page.
+    """
+    department_list = Department.objects.all()
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        print(form)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/employees')
+            except:
+                pass
+    else:
+        form = EmployeeForm()
+    return render(
+        request, 'employee_add.html',
+        {'form': form, 'departments': department_list})
+
+
+def edit_employee(request, employee_id):
+    """Edit employee.
+    :param request: Obj - Request.
+    :param employee_id: int - Unique identification of employee.
+    :return: Render to edit employee page.
+    """
+    department_list = Department.objects.all()
+    employee = Employee.objects.get(employee_id=employee_id)
+    return render(
+        request, 'employee_edit.html',
+        {'employee': employee,
+         'departments': department_list,
+         'gender_choices':
+             [GenderChoice.choices()[0][0], GenderChoice.choices()[1][0]]})
+
+
+def update_employee(request, employee_id):
+    """Update employee.
+    :param request: Obj - Request.
+    :param employee_id: int - Unique identification of employee.
+    :return: Renders to employees view on update or edit employee page.
+    """
+    department_list = Department.objects.all()
+    employee = Employee.objects.get(employee_id=employee_id)
+    form = EmployeeForm(request.POST, instance=employee)
+    if form.is_valid():
+        form.save()
+        return redirect('/employees')
+    return render(
+        request, 'employee_edit.html',
+        {'employee': employee,
+         'departments': department_list,
+         'gender_choices':
+             [GenderChoice.choices()[0][0], GenderChoice.choices()[1][0]]})
+
+
+def delete_employee(request, employee_id):
+    """Delete employee.
+    :param request: Obj - Request.
+    :param employee_id: int - Unique identification of department.
+    :return: Renders to employees view on delete.
+    """
+    employee = Employee.objects.get(employee_id=employee_id)
+    employee.delete()
+    return redirect('/employees')

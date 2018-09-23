@@ -23,21 +23,25 @@
     </tr>
     </thead>
     <tbody>
-    {% for employee in employees %}
-        <tr>
-            <td>{{ employee.employee_id }}</td>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.department.name }}</td>
-            <td>{{ employee.date_of_join }}</td>
-            <td>{{ employee.gender }}</td>
-            <td>{{ employee.address }}</td>
-            <td>{{ employee.salary }}</td>
-            <td>
-                <a href="/edit_employee/{{ employee.employee_id }}" class="link_button_action"><span>Edit</span></a>
-                <a href="/delete_employee/{{ employee.nmae }}" class="link_button_action">Delete</a>
-            </td>
-        </tr>
-    {% endfor %}
+    {% if employees %}
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.employee_id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.department.name }}</td>
+                <td>{{ employee.date_of_join|date:"Y-m-d" }}</td>
+                <td>{{ employee.gender|capfirst }}</td>
+                <td>{{ employee.address }}</td>
+                <td>{{ employee.salary }}</td>
+                <td>
+                    <a href="/edit_employee/{{ employee.employee_id }}" class="link_button_action"><span>Edit</span></a>
+                    <a href="/delete_employee/{{ employee.employee_id }}" class="link_button_action">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr><td colspan="8"><center>No records found!</center></td></tr>
+    {% endif %}
     </tbody>
 </table>
 <br>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Edit</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#id_date_of_join" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
+</head>
+<body>
+    <center><h1>Update Employee Details</h1></center>
+    <hr />
+    <div align="center">
+        <form method="POST" name ="edit_form" id="edit_form" action="/update_employee/{{ employee.employee_id }}" class="form-align">
+            {% csrf_token %}
+            <label>Employee Name:</label>
+            <input type="text" name="name" id="id_name" value="{{ employee.name }}" />
+            <br /><br />
+
+            <label>Department:</label>
+            <select name="department" id="id_department">
+                {% for department in departments %}
+                    {% if department.department_id == employee.department_id %}
+                        <option value="{{ department.department_id }}" selected="selected">{{ department.name }}</option>
+                    {% else %}
+                        <option value="{{ department.department_id }}">{{ department.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br /><br />
+
+            <label>Date of join:</label>
+            <input type="text" name="date_of_join" id="id_date_of_join" value="{{ employee.date_of_join|date:'Y-m-d' }}" />
+            <br /><br />
+
+            <label>Gender:</label>
+            <select name="gender" id="id_gender">
+                {% for gender in gender_choices %}
+                    {% if gender == employee.gender %}
+                        <option value="{{ gender }}" selected="selected">{{ gender|capfirst }}</option>
+                    {% else %}
+                        <option value="{{ gender }}">{{ gender|capfirst }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br /><br />
+
+            <label>Address:</label>
+            <input type="text" name="address" id="id_address" value="{{ employee.address }}" />
+            <br /><br />
+
+            <label>Salary:</label>
+            <input type="number" name="salary" id="id_salary" value="{{ employee.salary }}" />
+            <br /><br />
+            <center><button type="submit" class="link_button form-button">Submit</button></center>
+        </form>
+    </div>
+</body>
+</html>

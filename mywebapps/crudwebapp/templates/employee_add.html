@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Add</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#id_date_of_join" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
+</head>
+<body>
+    <center><h1>Add Employee Details</h1></center>
+    <hr />
+    <div align="center">
+        <form method="POST" name="add_form" id="add_form" action="/add_employee/" class="form-align">
+            {% csrf_token %}
+            <label>Employee Name:</label>
+            {{ form.name }}
+            <br /><br />
+
+            <label>Department:</label>
+            <select name="department" id="id_department">
+                {% for department in departments %}
+                    <option value="{{ department.department_id }}">{{ department.name }}</option>
+                {% endfor %}
+            </select>
+            <br /><br />
+
+            <label>Date of join:</label>
+            {{ form.date_of_join }}
+            <br /><br />
+
+            <label>Gender:</label>
+            {{ form.gender }}
+            <br /><br />
+
+            <label>Address:</label>
+            {{ form.address }}
+            <br /><br />
+
+            <label>Salary:</label>
+            {{ form.salary }}
+            <br /><br />
+            <center><button type="submit" class="link_button form-button">Submit</button></center>
+        </form>
+    </div>
+</body>
+</html>

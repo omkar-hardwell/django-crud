@@ -22,5 +22,21 @@ urlpatterns = [
         views.delete_department,
         name='department delete'
     ),
-    path('employees/', views.employees, name='employee')
+    path('employees/', views.employees, name='employee'),
+    path(
+        'edit_employee/<int:employee_id>/',
+        views.edit_employee,
+        name='employee edit'
+    ),
+    path(
+        'update_employee/<int:employee_id>',
+        views.update_employee,
+        name='employee update'
+    ),
+    path('add_employee/', views.add_employee, name='employee add'),
+    path(
+        'delete_employee/<int:employee_id>/',
+        views.delete_employee,
+        name='employee delete'
+    )
 ]

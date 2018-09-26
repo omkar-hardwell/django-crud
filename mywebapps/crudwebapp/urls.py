@@ -38,5 +38,8 @@ urlpatterns = [
         'delete_employee/<int:employee_id>/',
         views.delete_employee,
         name='employee delete'
-    )
+    ),
+    path('login/', views.authenticate_user, name='login'),
+    path('logout/', views.log_out, name='logout'),
+    path('home/', views.home_page, name='home')
 ]

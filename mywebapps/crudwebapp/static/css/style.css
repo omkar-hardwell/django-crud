@@ -47,7 +47,7 @@ tr:nth-child(odd) {background: #FFF}
     cursor: pointer;
 }
 
-input[type=text], input[type=number], select {
+input[type=text], input[type=number], input[type=password], select {
     padding: 10px 20px;
     margin: 8px 0;
     display: inline-block;
